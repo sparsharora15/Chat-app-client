@@ -1,0 +1,12 @@
+#root {
+ width: 100%;
+}
+
+
+.border-color{
+    border: 1px solid #449388;
+}
+
+.borderLeft {
+    border-left:5px solid #449388 ;
+}
