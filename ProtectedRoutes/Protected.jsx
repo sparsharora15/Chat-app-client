@@ -10,7 +10,7 @@ const Protected = ({ Components }) => {
       if (token) {
         await jose.jwtVerify(
           token,
-          new TextEncoder().encode(import.meta.env.VITE_SECRET_KEY || ""kfkr%^&*&^%^%cuelnn%%%$$#$#%^yr7ghtigntikjf"")
+          new TextEncoder().encode(import.meta.env.VITE_SECRET_KEY || "kfkr%^&*&^%^%cuelnn%%%$$#$#%^yr7ghtigntikjf")
         );
         return true;
       } else {
