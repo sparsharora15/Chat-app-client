@@ -16,7 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     let newSocket;
     if (user.userId) {
-      newSocket = io(import.meta.env.VITE_SOCKET_BASE_URL, {
+      newSocket = io(import.meta.env.VITE_SOCKET_BASE_URL || "https://chat-app-sockets.onrender.com", {
         query: {
           userId: user.userId,
         },

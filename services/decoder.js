@@ -10,7 +10,7 @@ async function decodeToken(suppliedToken = null) {
     }
     const deCodedToken = await jose.jwtVerify(
       token,
-      new TextEncoder().encode(import.meta.env.VITE_SECRET_KEY)
+      new TextEncoder().encode(import.meta.env.VITE_SECRET_KEY ||"kfkr%^&*&^%^%cuelnn%%%$$#$#%^yr7ghtigntikjf")
     );
     return { isDecode: true, deCodedToken: deCodedToken };
   } catch (e) {
