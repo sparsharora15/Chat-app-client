@@ -37,10 +37,10 @@ const Dashboard = () => {
    }, [socket]);
   return (
     <div className="w-full">
-      <div className="w-full h-32 bg-[#449388]" ></div>
+      <div className="w-full h-32 bg-[#449388] sticky z-[-10] top-0" ></div>
 
       <div className="container mx-auto" style={{ marginTop: "-128px" }}>
-        <div className="py-6 px-10 h-screen flex justify-center">
+        <div className="py-6 md:px-10 px-4 h-screen flex justify-center">
           <Outlet />
         </div>
       </div>

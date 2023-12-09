@@ -1,12 +1,26 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setUserDetailsNull } from "../Redux/slice";
 const ChatWindowHeader = ({ isTyping }) => {
   const state = useSelector((state) => state.userList);
-
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
   return (
     <>
-      <div className="py-2 px-3 bg-[#f0f2f5] flex flex-row justify-between items-center">
-        <div className="flex items-center">
+      <div className="py-2 px-3 bg-[#f0f2f5] flex sticky top-0 flex-row justify-between items-center">
+        <div className="flex items-center ">
+          {window.innerWidth <= "767" && (
+            <i
+              className="flex items-center justify-center w-10 h-10 fa-solid fa-arrow-left hover:cursor-pointer hover:rounded-full hover:bg-[#dadddf]"
+              style={{ color: "#81898d" }}
+              onClick={() => {
+                dispatch(setUserDetailsNull(null));
+                navigate("/");
+              }}
+            ></i>
+          )}
+
           <div>
             <img
               className="w-10 h-10 rounded-full"
@@ -14,7 +28,9 @@ const ChatWindowHeader = ({ isTyping }) => {
             />
           </div>
           <div className="ml-4">
-            <p className="text-grey-darkest">{state?.userDetail?.name}</p>
+            <p className="text-grey-darkest text-[10px] sm:text-[15px]">
+              {state?.userDetail?.name}
+            </p>
             <p className="text-grey-darker text-xs mt-1">
               {/* {state.usersTyping.includes(state.userDetail._id.toString()) && (
                 <span>typing...</span>

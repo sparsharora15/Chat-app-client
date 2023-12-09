@@ -24,7 +24,6 @@ const SidderList = () => {
     if (socket) {
    
       socket.on("receiveNewFriendRequest", (friendRequest) => {
-        console.log("Received new friend request:", friendRequest);
         // Handle the incoming friend request
         // dispatch(setNotifiCations({ friendRequest }));
       });
@@ -42,7 +41,6 @@ const SidderList = () => {
     
   
       socket.on("friendRequestAccepted", (friendRequest) => {
-        console.log("accepted a friend req", friendRequest);
         // Handle the incoming friend request
         // dispatch(setNotifiCations({ friendRequest }));
       });

@@ -106,7 +106,7 @@ const ChatWindow = () => {
     }
   }, []);
   return (
-    <div className="w-2/3 border flex flex-col">
+    <div className="md:w-2/3  border md:flex flex-col">
       <ChatWindowHeader isTyping={isTyping} />
 
       <div className="flex-1 overflow-auto bg-[#DAD3CC]">
@@ -155,7 +155,7 @@ const ChatWindow = () => {
         </div>
       </div>
 
-      <div className="bg-[#f0f2f5] px-4 py-4 flex items-center">
+      <div className="bg-[#f0f2f5] px-4 py-4 flex items-center sticky bottom-0">
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"

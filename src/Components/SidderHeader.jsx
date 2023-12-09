@@ -21,9 +21,7 @@ const SidderHeader = () => {
 
     navigate("/login");
   }
-  // useEffect(() => {
-  //   console.log(user.notification);
-  // }, [user]);
+
   return (
     <>
       <div className="py-2 px-3 bg-[#f0f2f5] flex flex-row justify-between items-center">
@@ -56,7 +54,6 @@ const SidderHeader = () => {
             className=" relative group ml-4  hover:rounded-full hover:bg-[#dadddf]"
             onClick={() => setNotificationWindowOpen(!isNotificationWindowOpen)}
           >
-           
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -71,11 +68,16 @@ const SidderHeader = () => {
             </svg>
           </div>
           {user.notification.length != 0 ? (
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                {user.notification.length}
-              </span>
-            ) : null}
-            {isNotificationWindowOpen ? <NotificationWindow /> : null}
+            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+              {user.notification.length}
+            </span>
+          ) : null}
+          {isNotificationWindowOpen ? (
+            <>
+              <NotificationWindow />
+           
+            </>
+          ) : null}
           <div className="relative group">
             <div
               onClick={toggleMenu}
@@ -95,7 +97,7 @@ const SidderHeader = () => {
               </svg>
             </div>
             <ul
-              className={`absolute mt-2 space-y-2 bg-white border border-gray-300 rounded-lg shadow-lg  py-2 text-sm text-gray-700 dark:text-gray-200 ${
+              className={`absolute mt-2 left-[-38px] space-y-2 bg-white border border-gray-300 rounded-lg shadow-lg  py-2 text-sm text-gray-700 dark:text-gray-200 ${
                 isMenuOpen ? "" : "hidden"
               }`}
               aria-labelledby="dropdownDelayButton"

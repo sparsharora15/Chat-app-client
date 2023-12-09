@@ -43,6 +43,9 @@ export const createChat = createAsyncThunk("createChat", async (data) => {
 export const getDetail = createAsyncThunk("detail", async (detail) => {
   return detail;
 });
+export const setUserDetailsNull = createAsyncThunk("setUserdetail", async (detail) => {
+  return detail;
+});
 export const getUserId = createAsyncThunk("userId", async (id) => {
   return id;
 });
@@ -69,7 +72,6 @@ export const getNotifiCations = createAsyncThunk(
       userId,
       localStorage.getItem("userToken")
     );
-    console.log(response.data.userNotifications)
     return response.data.userNotifications
   }
 );
@@ -299,6 +301,9 @@ const userListSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.notification = action.payload;
+      })
+      .addCase(setUserDetailsNull.fulfilled, (state, action) => {
+        state.userDetail = action.payload;
       })
   },
 });

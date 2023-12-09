@@ -19,7 +19,6 @@ const FriendRequest = () => {
       userId: user.userId,
       [e.target.name]: e.target.value,
     };
-    console.log(payload);
     dispatch(responseToReq(payload));
     if (payload.action === "accept") {
       const payload = {
@@ -37,12 +36,14 @@ const FriendRequest = () => {
   useEffect(() => {
     dispatch(listOfAllFrienReq({ userId: user.userId }));
   }, []);
-  // useEffect(() => {
-  //   console.log(user)
-  // }, []);
+
   return (
     <>
-      <div className="z-10 absolute ml-[23rem] bg-white  mt-5 space-y-2 border w-[23rem] py-2  rounded-lg">
+      <div
+        className={`${
+          window.innerWidth <= "767" ? " ml-[0px] left-[6px] absolute " : " ml-[23rem]  "
+        } z-10 absolute  bg-white  mt-5 space-y-2 border w-[23rem] py-2  rounded-lg`}
+      >
         <ul className="px-2 flex justify-between">
           <li className="	font-bold text-[#449388]">Friend requests</li>
         </ul>

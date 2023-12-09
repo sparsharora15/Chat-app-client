@@ -7,11 +7,24 @@ const ChatList = () => {
   const userList = useSelector((state) => state.userList);
 
   return (
-    <div className="flex rounded shadow-lg h-full w-full">
-      {userList.drawerString === "addUser" ? <AddUser/> : <SidderList />}
-      {/* <SidderList /> */}
-      
-      {userList.userDetail === null ? null : <ChatWindow />}
+    <div
+      className={` ${
+        window.innerWidth <= "767" && "justify-center"
+      } flex rounded shadow-lg h-full w-full`}
+    >
+      {window.innerWidth <= "767" && userList.userDetail ? (
+        <ChatWindow />
+      ) : userList.drawerString === "addUser" ? (
+        <AddUser />
+      ) : (
+        <SidderList />
+      )}
+      {/* {userList.drawerString === "addUser" ? <AddUser /> : <SidderList />} */}
+
+      {window.innerWidth <= "767" ? null : userList.userDetail ===
+        null ? null : (
+        <ChatWindow />
+      )}
     </div>
   );
 };

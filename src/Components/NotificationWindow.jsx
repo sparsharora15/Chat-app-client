@@ -30,77 +30,89 @@ const NotificationWindow = () => {
   useEffect(() => {
     dispatch(getNotifiCations({ userId: user.userId }));
   }, []);
-
+  // window.innerWidth <= "767"
   return (
     <>
-    <div className="z-10 absolute bg-white mt-5 space-y-2 border w-[23rem] py-2 rounded-lg">
-      <ul className="px-2 flex justify-between">
-        <li className="font-bold text-[#449388]">Notifications</li>
-        <li
-          className="underline text-[#449388]"
-          onClick={() => setIsFriendRequest(!isFriendRequest)}
-        >
-          Friend requests
-        </li>
-      </ul>
-      {user.isNotificationsLoading ? (
-        <div className="z-10 absolute h-[40vh] flex justify-center items-center bg-white mt-5 space-y-2 border w-[23rem] py-2 rounded-lg">
-          <Loader />
-        </div>
+      {window.innerWidth <= "767" && isFriendRequest ? (
+        <FriendRequest />
       ) : (
         <>
-          {user?.notification.length === 0 ? (
-            <div className="flex justify-center h-full items-center bg-white w-[23rem]">
-              <p>No new notifications found</p>
-            </div>
-          ) : (
-            user?.notification?.map((notification) => {
-              let name = notification?.description.split("accepted")[0];
-              let remainingText = notification?.description.split(" ");
-              console.log(remainingText);
-              return (
-                <div key={notification._id}>
-                  <div className="borderLeft py-1 px-1 bg-grey-lighter bg-[#e9edef] flex-1 overflow-auto mb-2">
-                    <div className="flex items-center bg-grey-light cursor-pointer">
-                      <div>
-                        <img
-                          className="h-9 w-9 rounded-full"
-                          src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
-                          alt="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
-                        />
-                      </div>
-                      <div className="ml-2 flex-1 py-2">
-                        <div className="flex items-bottom justify-between">
-                          <p className="text-grey-darkest flex">
-                            <strong>{name}</strong>
-                            &nbsp;
-                            {notification.title === "Friend Request Accepted"
-                              ? "accepted your friend request"
-                              : ""}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+          <div
+            className={`${
+              window.innerWidth <= "767" ? " left-[3px] " : null
+            }w-[23rem] z-10 absolute  bg-white mt-5 space-y-2 border  py-2 rounded-lg`}
+          >
+            <ul className="px-2 flex justify-between">
+              <li className="font-bold text-[#449388]">Notifications</li>
+              <li
+                className="underline text-[#449388]"
+                onClick={() => {
+                  setIsFriendRequest(!isFriendRequest);
+                }}
+              >
+                Friend requests
+              </li>
+            </ul>
+            {isFriendRequest && window.innerWidth <= "767" ? " " : ""}
+            {user.isNotificationsLoading ? (
+              <div className="z-10 absolute h-[40vh] flex justify-center items-center bg-white mt-5 space-y-2 border w-[23rem] py-2 rounded-lg">
+                <Loader />
+              </div>
+            ) : (
+              <>
+                {user?.notification.length === 0 ? (
+                  <div className="flex justify-center h-full items-center bg-white w-[23rem]">
+                    <p>No new notifications found</p>
                   </div>
-                  <hr />
-                </div>
-              );
-            })
-          )}
-          {user?.notification.length !== 0 ? (
-            <div className="w-full justify-center items-center flex">
-              <button className="px-1 py-1 bg-[#449388] rounded-md text-white outline-none hover:border-none focus:outline-none shadow-lg transform active:scale-x-75 transition-transform mx-5 flex">
-                <span>Mark as read</span>
-              </button>
-            </div>
-          ) : null}
+                ) : (
+                  user?.notification?.map((notification) => {
+                    let name = notification?.description.split("accepted")[0];
+                    // let remainingText = notification?.description.split(" ");
+                    return (
+                      <div key={notification._id}>
+                        <div className="borderLeft py-1 px-1 bg-grey-lighter bg-[#e9edef] flex-1 overflow-auto mb-2">
+                          <div className="flex items-center bg-grey-light cursor-pointer">
+                            <div>
+                              <img
+                                className="h-9 w-9 rounded-full"
+                                src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+                                alt="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+                              />
+                            </div>
+                            <div className="ml-2 flex-1 py-2">
+                              <div className="flex items-bottom justify-between">
+                                <p className="text-grey-darkest flex">
+                                  <strong>{name}</strong>
+                                  &nbsp;
+                                  {notification.title ===
+                                  "Friend Request Accepted"
+                                    ? "accepted your friend request"
+                                    : ""}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <hr />
+                      </div>
+                    );
+                  })
+                )}
+                {user?.notification.length !== 0 ? (
+                  <div className="w-full justify-center items-center flex">
+                    <button className="px-1 py-1 bg-[#449388] rounded-md text-white outline-none hover:border-none focus:outline-none shadow-lg transform active:scale-x-75 transition-transform mx-5 flex">
+                      <span>Mark as read</span>
+                    </button>
+                  </div>
+                ) : null}
+              </>
+            )}
+          </div>
+
+          {isFriendRequest ? <FriendRequest /> : null}
         </>
       )}
-    </div>
-  
-    {isFriendRequest ? <FriendRequest /> : null}
-  </>
-  
+    </>
   );
 };
 
