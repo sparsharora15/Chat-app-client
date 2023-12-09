@@ -49,7 +49,7 @@ const Login = () => {
   }
   return (
     <>
-    <div className="bg-[#e9edef] flex w-[70%] h-[70%] sm:w-1/2 flex-col items-center justify-center px-6 py-12 shadow-xl lg:px-8">
+    <div className="bg-[#e9edef] flex w-[90%] h-[70%] sm:w-1/2 flex-col items-center justify-center px-6 py-12 shadow-xl lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in to your account
