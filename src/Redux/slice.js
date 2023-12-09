@@ -96,7 +96,6 @@ export const sendRequest = createAsyncThunk("sendRequest", async (data) => {
 });
 export const userDetails = createAsyncThunk("userDetails", async (data) => {
   const response = await userData(data, localStorage.getItem("userToken"));
-
   return response.data;
 });
 export const listOfAllFrienReq = createAsyncThunk(

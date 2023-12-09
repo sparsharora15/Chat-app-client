@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import { setSocket } from "../src/Redux/socketSlice";
 import { io } from "socket.io-client";
 import decodeToken from "../services/decoder";
+import { userDetails } from "../src/Redux/slice";
 // import { setNotifiCations } from "../src/Redux/slice";
 
 const Dashboard = () => {
@@ -30,6 +31,19 @@ const Dashboard = () => {
       };
     }
   }, [dispatch, user.userId]);
+  useEffect(() => {
+    decodeToken()
+      .then((result) => {
+        const userId = result.deCodedToken.payload._id;
+        setUserId(userId);
+
+        dispatch(userDetails({ userId }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [dispatch]);
+
   useEffect(() => {
     socket?.on("receiveNewnotification",(res)=>{
     //  dispatch(setNotifiCations(res))

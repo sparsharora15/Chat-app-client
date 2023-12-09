@@ -10,13 +10,22 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  const [profileImage, setProfileImage] = useState();
   const navigate = useNavigate();
   const { name, email, password } = registerUser;
   function handleOnChange(e) {
     setRegisterUser({ ...registerUser, [e.target.name]: e.target.value });
   }
+  function handleOnImageChange(e) {
+    setProfileImage(e?.target?.files[0]);
+  }
   async function handleClick() {
-    const response = await dispatch(register(registerUser));
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("profilePicture", profileImage);
+    const response = await dispatch(register(formData));
     if (response?.payload?.msg === "User created successfully") {
       toast.success(response?.payload?.msg, {
         position: "top-right",
@@ -60,7 +69,7 @@ const SignUp = () => {
                 for="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Email address
+                Email address *
               </label>
               <div className="mt-2">
                 <input
@@ -71,6 +80,7 @@ const SignUp = () => {
                   onChange={(e) => handleOnChange(e)}
                   autoComplete="email"
                   required
+                  placeholder="Email"
                   className="block w-full focus:outline-none rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 p-2 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -80,7 +90,7 @@ const SignUp = () => {
                 for="text"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Your Name
+                Your Name *
               </label>
               <div className="mt-2">
                 <input
@@ -90,6 +100,7 @@ const SignUp = () => {
                   value={name}
                   onChange={(e) => handleOnChange(e)}
                   required
+                  placeholder="Name"
                   className="block w-full focus:outline-none rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 p-2 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -101,7 +112,7 @@ const SignUp = () => {
                   for="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Password
+                  Password *
                 </label>
               </div>
               <div className="mt-2">
@@ -113,7 +124,22 @@ const SignUp = () => {
                   onChange={(e) => handleOnChange(e)}
                   autoComplete="current-password"
                   required
-                  className="block w-full focus:outline-none p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                  placeholder="Password"
+                  className="block cursor-pointer w-full focus:outline-none p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                />
+              </div>
+              <div className="mt-2">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  for="small_size"
+                >
+                  Select your profile picture
+                </label>
+                <input
+                  className="bg-white block w-full focus:outline-none p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                  id="small_size"
+                  type="file"
+                  onChange={(e) => handleOnImageChange(e)}
                 />
               </div>
             </div>

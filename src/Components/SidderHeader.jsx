@@ -21,7 +21,6 @@ const SidderHeader = () => {
 
     navigate("/login");
   }
-
   return (
     <>
       <div className="py-2 px-3 bg-[#f0f2f5] flex flex-row justify-between items-center">
@@ -35,7 +34,11 @@ const SidderHeader = () => {
           ) : (
             <img
               className="w-10 h-10 rounded-full"
-              src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+              src={
+                user?.userData?.userDetails?.profilePicture ||
+                "https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+              }
+              alt="User Avatar"
             />
           )}
         </div>
@@ -75,7 +78,6 @@ const SidderHeader = () => {
           {isNotificationWindowOpen ? (
             <>
               <NotificationWindow />
-           
             </>
           ) : null}
           <div className="relative group">
