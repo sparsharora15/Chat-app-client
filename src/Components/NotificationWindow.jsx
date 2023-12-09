@@ -39,8 +39,8 @@ const NotificationWindow = () => {
         <>
           <div
             className={`${
-              window.innerWidth <= "767" ? " left-[3px] " : null
-            }w-[23rem] z-10 absolute  bg-white mt-5 space-y-2 border  py-2 rounded-lg`}
+              window.innerWidth <= "767" ? " left-[3px] w-[19rem]" : "w-[20rem]"
+            } z-10 absolute  bg-white mt-5 space-y-2 border  py-2 rounded-lg`}
           >
             <ul className="px-2 flex justify-between">
               <li className="font-bold text-[#449388]">Notifications</li>
@@ -55,13 +55,13 @@ const NotificationWindow = () => {
             </ul>
             {isFriendRequest && window.innerWidth <= "767" ? " " : ""}
             {user.isNotificationsLoading ? (
-              <div className="z-10 absolute h-[40vh] flex justify-center items-center bg-white mt-5 space-y-2 border w-[23rem] py-2 rounded-lg">
+              <div className="z-10 absolute h-[40vh] flex justify-center items-center bg-white mt-5 space-y-2 border w-[20rem] py-2 rounded-lg">
                 <Loader />
               </div>
             ) : (
               <>
                 {user?.notification.length === 0 ? (
-                  <div className="flex justify-center h-full items-center bg-white w-[23rem]">
+                  <div className="flex justify-center h-full items-center bg-white w-[20rem]">
                     <p>No new notifications found</p>
                   </div>
                 ) : (

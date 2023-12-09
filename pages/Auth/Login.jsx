@@ -51,12 +51,12 @@ const Login = () => {
     <>
     <div className="bg-[#e9edef] flex w-[70%] h-[70%] sm:w-1/2 flex-col items-center justify-center px-6 py-12 shadow-xl lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in to your account
         </h2>
       </div>
   
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mt-6 w-full">
         <div className="space-y-6">
           <div>
             <label
@@ -117,7 +117,7 @@ const Login = () => {
           </div>
         </div>
   
-        <p className="mt-10 text-center text-sm text-gray-500 ">
+        <p className="mt-6 mb-6 text-center text-sm text-gray-500 ">
           Not a member? &nbsp;
           <Link
             to="/register"

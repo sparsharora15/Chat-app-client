@@ -41,14 +41,14 @@ const FriendRequest = () => {
     <>
       <div
         className={`${
-          window.innerWidth <= "767" ? " ml-[0px] left-[6px] absolute " : " ml-[23rem]  "
-        } z-10 absolute  bg-white  mt-5 space-y-2 border w-[23rem] py-2  rounded-lg`}
+          window.innerWidth <= "767" ? " ml-[0px] w-[19rem] left-[6px] absolute " : "w-[20rem] ml-[23rem]  "
+        } z-10 absolute  bg-white  mt-5 space-y-2 border  py-2  rounded-lg`}
       >
         <ul className="px-2 flex justify-between">
           <li className="	font-bold text-[#449388]">Friend requests</li>
         </ul>
         {user.friendReqs?.friendRequests == 0 ? (
-          <div className=" flex justify-center h-full items-center bg-white  w-[23rem] ">
+          <div className=" flex justify-center h-full items-center bg-white  w-[20rem] ">
             <p>No friend request found</p>
           </div>
         ) : (

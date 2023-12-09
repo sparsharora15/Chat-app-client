@@ -46,16 +46,16 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="bg-[#e9edef] flex w-1/2 flex-col items-center justify-center px-6 py-12 shadow-xl h-[80%] lg:px-8">
+      <div className="bg-[#e9edef] flex md:w-1/2 w-[80%] flex-col items-center justify-center px-6 py-12 shadow-xl h-[80%] lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Register your new account
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-6 w-full">
           <div className="space-y-6">
-            <div>
+            <div className="w-full">
               <label
                 for="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -75,7 +75,7 @@ const SignUp = () => {
                 />
               </div>
             </div>
-            <div>
+            <div className="w-full">
               <label
                 for="text"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -95,7 +95,7 @@ const SignUp = () => {
               </div>
             </div>
 
-            <div>
+            <div className="w-full">
               <div className="flex items-center justify-between">
                 <label
                   for="password"
@@ -128,7 +128,7 @@ const SignUp = () => {
             </div>
           </div>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-6 mb-6 text-center text-sm text-gray-500">
             Already have an account? &nbsp;
             <Link
               to="/login"
