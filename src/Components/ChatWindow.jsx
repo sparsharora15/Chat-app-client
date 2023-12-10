@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import ChatWindowHeader from "./ChatWindowHeader";
 import moment from "moment";
 import sendIcon from "../assets/send.svg";
+import addNotification  from 'react-push-notification';
 import { useSelector, useDispatch } from "react-redux";
 import {
   createChat,
@@ -90,6 +91,14 @@ const ChatWindow = () => {
   useEffect(() => {
     socket.socket.on("receiveNewMessage", (res) => {
       dispatch(setChat(res));
+      console.log(res)
+      addNotification({
+        title: 'Sent you a text',
+        subtitle:  res.text,
+        message: res.text,
+        theme: 'darkblue',
+        native: true // when using native, your OS will handle theming.
+    });
     });
   }, []);
 

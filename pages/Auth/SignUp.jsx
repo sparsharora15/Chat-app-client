@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../src/Redux/slice";
 import { toast } from "react-toastify";
+import Loader from "../../src/Components/Loader";
 const SignUp = () => {
   const dispatch = useDispatch();
   const [registerUser, setRegisterUser] = useState({
@@ -11,6 +12,8 @@ const SignUp = () => {
     password: "",
   });
   const [profileImage, setProfileImage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   const { name, email, password } = registerUser;
   function handleOnChange(e) {
@@ -25,7 +28,10 @@ const SignUp = () => {
     formData.append("email", email);
     formData.append("password", password);
     formData.append("profilePicture", profileImage);
+    setIsLoading(true)
     const response = await dispatch(register(formData));
+    setIsLoading(false)
+
     if (response?.payload?.msg === "User created successfully") {
       toast.success(response?.payload?.msg, {
         position: "top-right",
@@ -146,10 +152,10 @@ const SignUp = () => {
 
             <div>
               <button
-                className="flex w-full focus:outline-none focus:bg-[#2a7067] justify-center rounded-md bg-[#449388] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm "
+                className="flex w-full items-center focus:outline-none h-10 focus:bg-[#2a7067] justify-center rounded-md bg-[#449388] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm "
                 onClick={() => handleClick()}
               >
-                Sign up
+                {isLoading ? <Loader /> : "Sign up"}
               </button>
             </div>
           </div>
