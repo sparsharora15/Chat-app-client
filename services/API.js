@@ -64,3 +64,11 @@ export const getNotification = async (data, token) => {
   const response = await axios.post(`${BASE_URL}users/getNotifications`, data, getHeaders(token));
   return response;
 };
+export const broadcastMessage = async (data, token) => {
+  const response = await axios.post(`${BASE_URL}chat/broadcastMesssage`, data, getHeaders(token));
+  return response;
+};
+export const sendMultimedia = async (data, token) => {
+  const response = await axios.post(`${BASE_URL}chat/sendMultimedia`, data, getHeaders(token));
+  return response;
+};

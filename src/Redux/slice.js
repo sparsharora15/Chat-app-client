@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createConversation,
@@ -10,6 +11,7 @@ import {
   responseToFriendRequest,
   friendList,
   getNotification,
+  broadcastMessage,
 } from "../../services/API";
 
 export const fetchList = createAsyncThunk("fetchList", async (userId) => {
@@ -43,9 +45,12 @@ export const createChat = createAsyncThunk("createChat", async (data) => {
 export const getDetail = createAsyncThunk("detail", async (detail) => {
   return detail;
 });
-export const setUserDetailsNull = createAsyncThunk("setUserdetail", async (detail) => {
-  return detail;
-});
+export const setUserDetailsNull = createAsyncThunk(
+  "setUserdetail",
+  async (detail) => {
+    return detail;
+  }
+);
 export const getUserId = createAsyncThunk("userId", async (id) => {
   return id;
 });
@@ -72,7 +77,7 @@ export const getNotifiCations = createAsyncThunk(
       userId,
       localStorage.getItem("userToken")
     );
-    return response.data.userNotifications
+    return response.data.userNotifications;
   }
 );
 export const removeTypingUser = createAsyncThunk(
@@ -123,6 +128,16 @@ export const getFriendsList = createAsyncThunk(
     return response.data;
   }
 );
+export const sendMessageToMany = createAsyncThunk(
+  "sendMessageToMany",
+  async (data) => {
+    const response = await broadcastMessage(
+      data,
+      localStorage.getItem("userToken")
+    );
+    return response.data;
+  }
+);
 
 const userListSlice = createSlice({
   name: "userList",
@@ -145,10 +160,7 @@ const userListSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchList.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+
       .addCase(fetchList.fulfilled, (state, action) => {
         state.isLoading = false;
         action.payload?.forEach((element) => {
@@ -163,10 +175,7 @@ const userListSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
       })
-      .addCase(register.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload.msg;
@@ -177,10 +186,7 @@ const userListSlice = createSlice({
         state.isError = true;
         state.message = "something went wrong";
       })
-      .addCase(getConversationBetweenTwoUser.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+
       .addCase(getConversationBetweenTwoUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.chats = action.payload;
@@ -192,14 +198,7 @@ const userListSlice = createSlice({
         state.message = "something went wrong";
         state.chats = [];
       })
-      .addCase(createChat.pending, (state) => {
-        // state.isLoading = true;
-        state.isError = false;
-      })
-      .addCase(createChat.fulfilled, (state, action) => {
-        // state.isLoading = false;
-        state.isError = false;
-      })
+
       .addCase(createChat.rejected, (state, action) => {
         state.isLoading = false;
         // state.isError = true;
@@ -229,19 +228,12 @@ const userListSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
       })
-      .addCase(sendRequest.pending, (state, action) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+
       .addCase(sendRequest.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
       })
-      .addCase(userDetails.pending, (state, action) => {
-        state.isLoading = false;
-        state.isError = false;
-        state.userData = action.payload;
-      })
+
       .addCase(userDetails.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = false;
@@ -257,18 +249,12 @@ const userListSlice = createSlice({
         state.isError = false;
         state.friendReqs = action.payload;
       })
-      .addCase(listOfAllFrienReq.pending, (state, action) => {
-        state.isNotificationsLoading = true;
-        state.isError = false;
-      })
+
       .addCase(listOfAllFrienReq.rejected, (state, action) => {
         state.isNotificationsLoading = false;
         state.isError = true;
       })
-      .addCase(responseToReq.pending, (state, action) => {
-        state.isNotificationsLoading = true;
-        state.isError = false;
-      })
+
       .addCase(responseToReq.fulfilled, (state, action) => {
         state.isNotificationsLoading = false;
         state.isError = false;
@@ -281,10 +267,7 @@ const userListSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
       })
-      .addCase(getFriendsList.pending, (state, action) => {
-        state.isLoading = true;
-        state.isError = false;
-      })
+
       .addCase(getFriendsList.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
@@ -304,6 +287,9 @@ const userListSlice = createSlice({
       .addCase(setUserDetailsNull.fulfilled, (state, action) => {
         state.userDetail = action.payload;
       })
+      .addCase(sendMessageToMany.fulfilled, (state, action) => {
+        console.log(action)
+      });
   },
 });
 

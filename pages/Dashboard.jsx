@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Outlet } from "react-router-dom";
@@ -6,7 +6,6 @@ import { setSocket } from "../src/Redux/socketSlice";
 import { io } from "socket.io-client";
 import decodeToken from "../services/decoder";
 import { userDetails } from "../src/Redux/slice";
-// import { setNotifiCations } from "../src/Redux/slice";
 
 const Dashboard = () => {
   const [userId, setUserId] = useState("");
@@ -44,11 +43,7 @@ const Dashboard = () => {
       });
   }, [dispatch]);
 
-  useEffect(() => {
-    socket?.on("receiveNewnotification",(res)=>{
-    //  dispatch(setNotifiCations(res))
-    })
-   }, [socket]);
+ 
   return (
     <div className="w-full">
       <div className="w-full h-32 bg-[#449388] sticky z-[-10] top-0" ></div>

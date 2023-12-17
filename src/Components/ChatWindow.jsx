@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from "react";
 import ChatWindowHeader from "./ChatWindowHeader";
 import moment from "moment";
@@ -120,11 +121,11 @@ const ChatWindow = () => {
 
       <div className="flex-1 overflow-auto bg-[#DAD3CC]">
         <div className="py-2 px-3">
-          <div className="flex justify-center mb-2">
+          {/* <div className="flex justify-center mb-2">
             <div className="rounded py-2 px-4 bg-[#DDECF2]">
               <p className="text-sm uppercase">February 20, 2018</p>
             </div>
-          </div>
+          </div> */}
 
           <div className="flex justify-center mb-4">
             <div className="rounded py-2 px-4 bg-[#FCF4CB]">

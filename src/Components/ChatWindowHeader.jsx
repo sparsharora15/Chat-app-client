@@ -1,11 +1,38 @@
-import React, { useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setUserDetailsNull } from "../Redux/slice";
-const ChatWindowHeader = ({ isTyping }) => {
+import { sendMultimedia } from "../../services/API";
+const ChatWindowHeader = () => {
   const state = useSelector((state) => state.userList);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userList = useSelector((state) => state.userList);
+
+  const fileInputRef = useRef(null);
+
+  const handleFileIconClick = async (e) => {
+    const payload = {
+      sender: userList?.userData?.userDetails?._id,
+      receiver: state?.userDetail?._id,
+    };
+    const formData = new FormData();
+
+    formData.append("sender", payload.sender);
+    formData.append("receiver", payload.receiver);
+
+    formData.append("file", e.target?.files);
+
+    fileInputRef.current.click();
+    console.log("formData:", formData);
+    const res = await sendMultimedia(
+      formData,
+      localStorage.getItem("userToken")
+    );
+    console.log(res)
+  };
+
   return (
     <>
       <div className="py-2 px-3 bg-[#f0f2f5] flex sticky top-0 flex-row justify-between items-center">
@@ -55,7 +82,10 @@ const ChatWindowHeader = ({ isTyping }) => {
               ></path>
             </svg>
           </div>
-          <div className="ml-6">
+          <div
+            className="ml-6 cursor-pointer"
+            onClick={(e) => handleFileIconClick(e)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -83,6 +113,15 @@ const ChatWindowHeader = ({ isTyping }) => {
               ></path>
             </svg>
           </div>
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={(e) => {
+              // Handle file input change if needed
+              console.log("File selected:", e.target.files[0]);
+            }}
+          />
         </div>
       </div>
     </>

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import  {  useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../src/Redux/slice";
 import { toast } from "react-toastify";
@@ -61,7 +61,7 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="bg-[#e9edef] flex md:w-1/2 w-[90%] flex-col items-center justify-center px-6 py-12 shadow-xl h-[80%] lg:px-8">
+      <div className="bg-[#e9edef] flex md:w-1/2 w-[90%] flex-col items-center justify-center px-6 py-12 shadow-xl  lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Register your new account
@@ -72,7 +72,7 @@ const SignUp = () => {
           <div className="space-y-6">
             <div className="w-full">
               <label
-                for="email"
+                htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Email address *
@@ -93,7 +93,7 @@ const SignUp = () => {
             </div>
             <div className="w-full">
               <label
-                for="text"
+                htmlFor="text"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Your Name *
@@ -115,7 +115,7 @@ const SignUp = () => {
             <div className="w-full">
               <div className="flex items-center justify-between">
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Password *
@@ -136,8 +136,8 @@ const SignUp = () => {
               </div>
               <div className="mt-2">
                 <label
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  for="small_size"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  htmlFor="small_size"
                 >
                   Select your profile picture
                 </label>
