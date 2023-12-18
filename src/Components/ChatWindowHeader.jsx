@@ -11,7 +11,7 @@ const ChatWindowHeader = () => {
   const userList = useSelector((state) => state.userList);
 
   const fileInputRef = useRef(null);
-
+  console.log(userList?.userDetail?.profilePicture);
   const handleFileIconClick = async (e) => {
     const payload = {
       sender: userList?.userData?.userDetails?._id,
@@ -30,7 +30,7 @@ const ChatWindowHeader = () => {
       formData,
       localStorage.getItem("userToken")
     );
-    console.log(res)
+    console.log(res);
   };
 
   return (
@@ -48,10 +48,13 @@ const ChatWindowHeader = () => {
             ></i>
           )}
 
-          <div>
+          <div className=" h-12 flex items-center w-12 justify-center border rounded-[40px]">
             <img
-              className="w-10 h-10 rounded-full"
-              src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+              className="h-[90%]  "
+              src={
+                userList?.userDetail?.profilePicture ||
+                `https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp`
+              }
             />
           </div>
           <div className="ml-4">
@@ -67,7 +70,7 @@ const ChatWindowHeader = () => {
           </div>
         </div>
 
-        <div className="flex">
+        {/* <div className="flex">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +125,7 @@ const ChatWindowHeader = () => {
               console.log("File selected:", e.target.files[0]);
             }}
           />
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -66,15 +67,16 @@ const NotificationWindow = () => {
                   </div>
                 ) : (
                   user?.notification?.map((notification) => {
+                    console.log(notification)
                     let name = notification?.description.split("accepted")[0];
                     // let remainingText = notification?.description.split(" ");
                     return (
                       <div key={notification._id}>
                         <div className="borderLeft py-1 px-1 bg-grey-lighter bg-[#e9edef] flex-1 overflow-auto mb-2">
                           <div className="flex items-center bg-grey-light cursor-pointer">
-                            <div>
+                            <div className=" h-12 flex items-center w-12 justify-center border rounded-[40px]">
                               <img
-                                className="h-9 w-9 rounded-full"
+                                className="h-[90%]  "
                                 src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
                                 alt="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
                               />

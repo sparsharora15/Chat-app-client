@@ -49,6 +49,7 @@ const ChatWindow = () => {
   };
 
   const handleOnClick = () => {
+    if(sendMessage.trim()==="") return
     dispatch(
       createChat({
         receiverId: user.userDetail._id,
@@ -102,7 +103,11 @@ const ChatWindow = () => {
     // });
     });
   }, []);
-
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleOnClick();
+    }
+  };
   useEffect(() => {
     scroll?.current?.scrollIntoView({ behavior: "smooth" });
   }, [user.chats]);
@@ -136,6 +141,7 @@ const ChatWindow = () => {
             </div>
           </div>
           {user.chats.map((message, i) => {
+            console.log(message)
             const formattedTime = moment(message.createdAt).format("h:mm A");
             return (
               <div

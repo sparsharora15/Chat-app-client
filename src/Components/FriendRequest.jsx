@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  getFriendsList,
   listOfAllFrienReq,
   responseToReq,
   // setNotifiCations,
@@ -26,6 +28,10 @@ const FriendRequest = () => {
         title: "Friend request accept",
         description: "Accepted your friend request",
       };
+      dispatch(getFriendsList({ userId: user.userId }));
+
+      dispatch(listOfAllFrienReq({ userId: user.userId }));
+
       socket.emit("acceptFriendRequest", payload);
       // dispatch(setNotifiCations(payload));
     }
@@ -35,7 +41,7 @@ const FriendRequest = () => {
   };
   useEffect(() => {
     dispatch(listOfAllFrienReq({ userId: user.userId }));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -53,13 +59,14 @@ const FriendRequest = () => {
           </div>
         ) : (
           user.friendReqs?.friendRequests.map((data, i) => {
+            console.log(data)
             return (
               <div key={i}>
                 <div className="borderLeft py-1 px-1 bg-grey-lighter  bg-[#e9edef] flex-1 overflow-auto mb-2">
                   <div className=" flex items-center bg-grey-light cursor-pointer">
-                    <div>
+                  <div className=" h-12 flex items-center w-12 justify-center border rounded-[40px]">
                       <img
-                        className="h-9 w-9 rounded-full"
+                        className="h-[90%]  "
                         src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
                         alt="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
                       />

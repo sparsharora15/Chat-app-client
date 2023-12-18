@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +12,7 @@ const SidderHeader = () => {
   const user = useSelector((state) => state.userList);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNotificationWindowOpen, setNotificationWindowOpen] = useState(false);
-
+  
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -58,6 +59,11 @@ const SidderHeader = () => {
             className=" relative group ml-4  hover:rounded-full hover:bg-[#dadddf]"
             onClick={() => setNotificationWindowOpen(!isNotificationWindowOpen)}
           >
+             {user.notification.length != 0 ? (
+            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+              {user.notification.length}
+            </span>
+          ) : null}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -77,11 +83,7 @@ const SidderHeader = () => {
               className="text-[#81898d] h-[20px] w-[20px]"
             />
           </div>
-          {user.notification.length != 0 ? (
-            <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-              {user.notification.length}
-            </span>
-          ) : null}
+         
           {isNotificationWindowOpen ? (
             <>
               <NotificationWindow />
@@ -126,13 +128,7 @@ const SidderHeader = () => {
         </div>
       </div>
 
-      <div className="py-2 px-2 bg-white">
-        <input
-          type="text"
-          className="w-full bg-[#f0f2f5] rounded-lg focus:outline-none px-2 py-2 text-sm"
-          placeholder="Search or start new chat"
-        />
-      </div>
+      
     </>
   );
 };

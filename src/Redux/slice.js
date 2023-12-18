@@ -170,6 +170,10 @@ const userListSlice = createSlice({
 
         state.isError = false;
       })
+      .addCase(fetchList.pending, (state, action) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
 
       .addCase(fetchList.rejected, (state, action) => {
         state.isLoading = false;
@@ -266,6 +270,10 @@ const userListSlice = createSlice({
       .addCase(getFriendsList.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+      })
+      .addCase(getFriendsList.pending, (state, action) => {
+        state.isLoading = true;
+        state.isError = false;
       })
 
       .addCase(getFriendsList.fulfilled, (state, action) => {
